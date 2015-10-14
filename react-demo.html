@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+	</style>
+	<script src="http://fb.me/react-0.12.2.js"></script>
+	<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+</head>
+<body>
+	<div id='app'></div>
+
+	<script type="text/jsx">
+	var Rectangle = React.createClass({
+		render: function() {
+			return (
+				<svg className='rectangleSvg'>
+					<rect width='400' height='300' fill={this.props.color} />
+				</svg>
+			);
+		}
+	});
+
+	var ColorButton = React.createClass({
+		render: function() {
+			return (
+				<button id='colorButton'>{this.props.buttonText}</button>
+			);
+		}
+	});
+
+	var ParentComponent = React.createClass({
+		getInitialState: function() {
+			return {
+				isRectBlue: false
+			}
+		},
+		changeColor: function(e) {
+			if (e.target.id === 'colorButton') {
+				this.setState({
+					isRectBlue: !this.state.isRectBlue
+				});
+			}
+		},
+		render: function() {
+			var rectColor = this.state.isRectBlue ? 'red' : 'blue';
+			return (
+				<section onClick={this.changeColor}>
+					<ColorButton
+						buttonText='Change colors!' />
+					<Rectangle
+						color={rectColor} />
+				</section>
+			);
+		}
+	});
+
+	React.render(
+	  <ParentComponent />,
+	  document.getElementById('app')
+	);
+	</script>
+</body>
+</html>
