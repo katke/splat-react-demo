@@ -2,6 +2,12 @@
 <html>
 <head>
 	<style type="text/css">
+		#colorButton {
+			display: block;
+			margin-left: 100px;
+			height: 80px;
+			width: 80px;
+		}
 	</style>
 	<script src="http://fb.me/react-0.12.2.js"></script>
 	<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
@@ -14,7 +20,7 @@
 		render: function() {
 			return (
 				<svg className='rectangleSvg'>
-					<rect width='400' height='300' fill={this.props.color} />
+					<rect width='500' height='400' fill={this.props.color} />
 				</svg>
 			);
 		}
@@ -45,10 +51,10 @@
 			var rectColor = this.state.isRectBlue ? 'red' : 'blue';
 			return (
 				<section onClick={this.changeColor}>
-					<ColorButton
-						buttonText='Change colors!' />
 					<Rectangle
 						color={rectColor} />
+					<ColorButton
+						buttonText='Change colors!' />
 				</section>
 			);
 		}
