@@ -20,7 +20,7 @@
 		render: function() {
 			return (
 				<svg className='rectangleSvg'>
-					<rect width='500' height='400' fill={this.props.color} />
+					<rect width='700' height='500' fill={this.props.color} />
 				</svg>
 			);
 		}
@@ -48,9 +48,11 @@
 			}
 		},
 		render: function() {
-			var rectColor = this.state.isRectBlue ? 'red' : 'blue';
+			var rectColor = this.state.isRectBlue ? 'blue' : 'red';
 			return (
 				<section onClick={this.changeColor}>
+					<h1>Current isRectBlue state: {this.state.isRectBlue.toString()}</h1>
+					<h2>Rectangle Color Prop value: {rectColor}</h2>
 					<Rectangle
 						color={rectColor} />
 					<ColorButton
