@@ -2,12 +2,12 @@
 <html>
 <head>
 	<style type="text/css">
-		#colorButton {
-			display: block;
-			margin-left: 100px;
-			height: 80px;
-			width: 80px;
-		}
+	#colorButton {
+		display: block;
+		margin-left: 100px;
+		height: 80px;
+		width: 80px;
+	}
 	</style>
 	<script src="http://fb.me/react-0.12.2.js"></script>
 	<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
@@ -16,8 +16,12 @@
 	<div id='app'></div>
 
 	<script type="text/jsx">
+	// Rectangle Component
 	var Rectangle = React.createClass({
+		// No need for state here, since it's handed down to the Rectangle
+		// component via this.props.color
 		render: function() {
+			// this.props is automatically available in any child component.
 			return (
 				<svg className='rectangleSvg'>
 					<rect width='700' height='500' fill={this.props.color} />
@@ -28,6 +32,7 @@
 
 	//////////////////////////////////////////////////////////////////
 
+	// Button component
 	var ColorButton = React.createClass({
 		render: function() {
 			return (
@@ -38,21 +43,36 @@
 
 	///////////////////////////////////////////////////////////////////
 
+	// Owner/Parent Component, which means this is ideally what handles its
+	// own state and that of child elements (if state is necessary—it won't always be)
 	var ParentComponent = React.createClass({
+		// getInitialState is an out-of-the-box React functions, and is required
+		// to initialize any state values you may want to use. State is a JS object
+		// (key/value pairs), and any variables that are set here will be easily
+		// accessible elsewhere via 'this.state.variableName'
 		getInitialState: function() {
 			return {
 				isRectBlue: false
 			}
 		},
+		// Adding an event handler in order to detect clicks on the button
 		changeColor: function(e) {
 			if (e.target.id === 'colorButton') {
+				// this.setState is how you tell React to update this state in value,
+				// which in turns tells React is needs to rerender something. setState
+				// is the only way you should be altering this.state values—never
+				// directly assign values by writing this.state.isRectBlue = false
 				this.setState({
 					isRectBlue: !this.state.isRectBlue
 				});
 			}
 		},
 		render: function() {
+			// Once we're here in the render method, it means React is about to render
+			// this component, so we're going to read from the current state and assign
+			// rectColor a color value depending on what the state is at the time of rendering
 			var rectColor = this.state.isRectBlue ? 'blue' : 'red';
+			// Note the interpolation/JS-within-HTML below inside the { }
 			return (
 				<section onClick={this.changeColor}>
 					<h1>Current isRectBlue state: {this.state.isRectBlue.toString()}</h1>
@@ -66,9 +86,11 @@
 		}
 	});
 
+// This is where we're actually building the Parent Component (and all its child components)
+// and injecting it into the DOM (in this case, the element with the id of 'app')
 	React.render(
-	  <ParentComponent />,
-	  document.getElementById('app')
+		<ParentComponent />,
+		document.getElementById('app')
 	);
 	</script>
 </body>
