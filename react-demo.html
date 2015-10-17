@@ -2,18 +2,38 @@
 <html>
 <head>
 	<style type="text/css">
-	#colorButton {
-		display: block;
-		margin-left: 100px;
-		height: 80px;
-		width: 80px;
-	}
+		#colorButton {
+			display: block;
+			margin-left: 100px;
+			height: 80px;
+			width: 80px;
+		}
+
+		.color-button-component {
+			padding: 10px;
+			border: green 3px dashed;
+			margin: 10px;
+			width: 300px;
+		}
+
+		.rectangle-component {
+			margin: 10px;
+			padding: 10px;
+			border: purple 3px dotted;
+			width: 300px;
+		}
+
+		.parent-component {
+			padding: 10px;
+			border: black 3px solid;
+			width: 350px;
+		}
 	</style>
 	<script src="http://fb.me/react-0.12.2.js"></script>
 	<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
 </head>
 <body>
-	<div id='app'></div>
+	<div id='react-stuff-goes-here'></div>
 
 	<script type="text/jsx">
 	// Rectangle Component
@@ -23,9 +43,12 @@
 		render: function() {
 			// this.props is automatically available in any child component.
 			return (
-				<svg className='rectangleSvg'>
-					<rect width='700' height='500' fill={this.props.color} />
-				</svg>
+				<div className='rectangle-component'>
+					<h3>Rectangle Color Prop value: {this.props.color}</h3>
+					<svg className='rectangleSvg'>
+						<rect width='300' height='200' fill={this.props.color} />
+					</svg>
+				</div>
 			);
 		}
 	});
@@ -36,7 +59,9 @@
 	var ColorButton = React.createClass({
 		render: function() {
 			return (
-				<button id='colorButton'>{this.props.buttonText}</button>
+				<div className='color-button-component'>
+					<button id='colorButton'>{this.props.buttonText}</button>
+				</div>
 			);
 		}
 	});
@@ -74,9 +99,8 @@
 			var rectColor = this.state.isRectBlue ? 'blue' : 'red';
 			// Note the interpolation/JS-within-HTML below inside the { }
 			return (
-				<section onClick={this.changeColor}>
+				<section onClick={this.changeColor} className='parent-component'>
 					<h1>Current isRectBlue state: {this.state.isRectBlue.toString()}</h1>
-					<h2>Rectangle Color Prop value: {rectColor}</h2>
 					<Rectangle
 						color={rectColor} />
 					<ColorButton
@@ -90,7 +114,7 @@
 // and injecting it into the DOM (in this case, the element with the id of 'app')
 	React.render(
 		<ParentComponent />,
-		document.getElementById('app')
+		document.getElementById('react-stuff-goes-here')
 	);
 	</script>
 </body>
