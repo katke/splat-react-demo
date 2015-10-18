@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<style type="text/css">
-			#colorButton {
+			.button {
 				display: block;
 				margin-left: 100px;
 				height: 80px;
@@ -60,7 +60,7 @@
 				render: function() {
 					return (
 						<div className='color-button-component'>
-							<button id='colorButton'>{this.props.buttonText}</button>
+							<button className='button' id={this.props.id}>{this.props.buttonText}</button>
 						</div>
 					);
 				}
@@ -103,7 +103,11 @@
 							<Rectangle
 								color={rectColor} />
 							<ColorButton
+								id='colorButton'
 								buttonText='Change colors!' />
+							<ColorButton
+								id='randomButton'
+								buttonText="This doesn't do anything" />
 						</section>
 					);
 				}
