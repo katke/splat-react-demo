@@ -36,12 +36,14 @@
 		<div id='react-stuff-goes-here'></div>
 
 		<script type="text/jsx">
+		///////////////////////////////////////////////////////////////////////
 			// Rectangle Component
 			var Rectangle = React.createClass({
 				// No need for state here, since it's handed down to this
 				// component via this.props.color
 				render: function() {
-					// this.props is automatically available in any child component.
+					// this.props is automatically available in any child component
+					// Access its value by call this.props.variableName
 					return (
 						<div className='rectangle-component'>
 							<h3>Rectangle Color Prop value: {this.props.color}</h3>
@@ -86,7 +88,7 @@
 						// this.setState is how you tell React to update this state in value,
 						// which in turns tells React it needs to rerender something. setState
 						// is the only way you should be altering this.state values—never
-						// directly assign values by writing this.state.isRectBlue = false
+						// directly assign values by writing this.state.isRectRed = false
 						this.setState({
 							isRectRed: !this.state.isRectRed
 						});
@@ -114,11 +116,12 @@
 			});
 
 		// This is where we're actually building the Parent Component (and all its child components)
-		// and injecting it into the DOM (in this case, the element with the id of 'app')
+		// and injecting it into the DOM (in this case, the element with the id of 'react-stuff-goes-here')
 			React.render(
 				<ParentComponent />,
 				document.getElementById('react-stuff-goes-here')
 			);
+
 		</script>
 	</body>
 </html>
